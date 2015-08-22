@@ -45,8 +45,8 @@ public class AsyncImageLoader {
 		taskCollection = new HashSet<BitmapWorkerTask>();
 		// 获取应用程序最大可用内存
 		int maxMemory = (int) Runtime.getRuntime().maxMemory();
-		int cacheSize = maxMemory / 8;
-		// 设置内存缓存为最大可用内存的八分之一
+		int cacheSize = maxMemory / 4;
+		// 设置内存缓存为最大可用内存的四分之一
 		memoryCache = new LruMemoryCache(cacheSize);
 	}
 
