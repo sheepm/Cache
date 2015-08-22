@@ -57,7 +57,7 @@ public class ListAdapter extends BaseAdapter {
 		viewHolder.imageView.setTag(mdatas.get(position));
 		// 开启异步线程加载图片
 		AsyncImageLoader.getInstance(mContext).loadBitmaps(mListView,
-				viewHolder.imageView, mdatas.get(position));
+				viewHolder.imageView, mdatas.get(position), 300, 300);
 		return convertView;
 	}
 

@@ -46,9 +46,29 @@ public class MainActivity extends Activity {
 		data.add(Constants.url13);
 		data.add(Constants.url14);
 		data.add(Constants.url15);
+		data.add(Constants.url16);
+		data.add(Constants.url17);
+		data.add(Constants.url18);
+		data.add(Constants.url19);
+		data.add(Constants.url20);
+		data.add(Constants.url21);
+		data.add(Constants.url22);
+		data.add(Constants.url23);
+		data.add(Constants.url24);
+		data.add(Constants.url25);
+		data.add(Constants.url26);
+		data.add(Constants.url27);
+		data.add(Constants.url28);
 		
 		adapter = new ListAdapter(this, data, listView);
 		listView.setAdapter(adapter);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		//在调用onPause方法，将缓存记录同步到journal文件中
+		AsyncImageLoader.getInstance(this).flushCache();
 	}
 
 }

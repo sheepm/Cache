@@ -25,7 +25,7 @@ public class LruMemoryCache implements MemoryCacheAware<String, Bitmap> {
 		}
 
 		this.maxSize = maxSize;
-		// 按照访问顺序排序
+		// 按照访问顺序排序,第三个参数设置为true时按照访问顺序排序，设为false时按照插入顺序排序
 		this.cache = new LinkedHashMap<String, Bitmap>(0, 0.75f, true);
 
 	}
@@ -39,7 +39,8 @@ public class LruMemoryCache implements MemoryCacheAware<String, Bitmap> {
 		
 		synchronized(this){
 			currentSize += sizeOf(key, value);
-			
+			//previous是先前的key,value映射，如果没有就为null,这里因为前面加上了内存，所以判断如果先前有的话
+			//是不会插入的，这样再将内存减去，在操作完后，调用一次trimtosize移除缓存值达到上限时访问最少的对象
 			Bitmap previous = cache.put(key, value);
 			if (previous != null) {
 				currentSize -= sizeOf(key, previous);
@@ -121,7 +122,7 @@ public class LruMemoryCache implements MemoryCacheAware<String, Bitmap> {
 	}
 
 	/**
-	 * 返回指定图片大小
+	 * 返回指定图片的大小
 	 * 
 	 * @param key
 	 * @param value
